@@ -14,7 +14,7 @@ constructor(props){
         id:1, title: "Еще одно важное дело", done: false
       },
       {
-        id:2, title:"Неповерить совим глазам", done: false
+        id:2, title:"Не поверить совим глазам", done: false
       }
     ],
     input: '',
@@ -24,6 +24,7 @@ constructor(props){
   this.chahgeInput = this.chahgeInput.bind(this);
   this.pressEnter = this.pressEnter.bind(this);
   this.doneChange = this.doneChange.bind(this);
+  this.delItem = this.delItem.bind(this);
 }
 
 addedItem() {
@@ -31,9 +32,9 @@ addedItem() {
   if(this.state.input.trim().length < 3){
     alert('Слишком короткая задача');
   }else{
-  this.setState(()=>{
+  this.setState((state)=>{
 
-    let items = this.state.items;
+    let {items} = this.state;
 
     items.push({
       id: this.state.items.length,
@@ -41,7 +42,7 @@ addedItem() {
       done: false
     });
 
-    return items;
+    // return items;
   });
 
   this.setState({
@@ -63,19 +64,37 @@ pressEnter(e) {
   }
 }
 
-doneChange() {
-  console.log('click done');
+doneChange(e) {
+  console.log(this.state.items.id);
 }
+
+
+//работает неправильно ???
+delItem() {
+console.log('delete');
+
+  this.setState(() => {
+    let items = this.state.items;
+      for(let i=0; i<=items.length; i++){
+        if(items[i].done){
+          delete items[i];
+        }
+      }
+      return items;
+    });
+}
+
+
   render(){
     return (
       <div className="app">
         <header>
+
           <h1>ToDo List</h1>
-          <button>X</button>
+          <button onClick={this.delItem}>X</button>
+
         </header>
-    {this.state.telo.map(it=>(
-      <li>{it}</li>
-    ))}
+  
           <div>
             {this.state.items.map(item => (
             <p key={item.id} onClick={this.doneChange}>
