@@ -25,9 +25,11 @@ constructor(props){
   this.pressEnter = this.pressEnter.bind(this);
 }
 
-addedItem = () => {
+addedItem() {
   console.log('click');
-  
+  if(this.state.input.trim().length < 3){
+    alert('Слишком короткая задача');
+  }else{
   this.setState(state=>{
 
     let items = this.state.items;
@@ -40,35 +42,20 @@ addedItem = () => {
 
     return items;
   });
+
   this.setState({
     input: ''
   })
+}
     console.log(this.state);
 }
-
-// adderItem = () => {
-//   console.log('click');
-  
-//   this.setState(state=>{
-
-//     let telo = this.state.telo;
-
-//     telo.push(this.state.input);
-
-//     return telo;
-//   });
-//   this.setState({
-//     input: ''
-//   })
-//     console.log(this.state.telo);
-// }
 
 chahgeInput(e) {
   this.setState({input: e.target.value})
   console.log('изменения');
 }
 
-pressEnter(e){
+pressEnter(e) {
   if(e.key ==='Enter'){
     console.log('нажата');
     this.addedItem();
@@ -101,3 +88,22 @@ pressEnter(e){
 }
 
 export default App;
+
+
+
+// adderItem = () => {
+//   console.log('click');
+  
+//   this.setState(state=>{
+
+//     let telo = this.state.telo;
+
+//     telo.push(this.state.input);
+
+//     return telo;
+//   });
+//   this.setState({
+//     input: ''
+//   })
+//     console.log(this.state.telo);
+// }
