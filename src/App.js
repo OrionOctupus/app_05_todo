@@ -23,6 +23,7 @@ constructor(props){
   this.addedItem = this.addedItem.bind(this);
   this.chahgeInput = this.chahgeInput.bind(this);
   this.pressEnter = this.pressEnter.bind(this);
+  this.doneChange = this.doneChange.bind(this);
 }
 
 addedItem() {
@@ -62,6 +63,9 @@ pressEnter(e) {
   }
 }
 
+doneChange() {
+  console.log('click done');
+}
   render(){
     return (
       <div className="app">
@@ -74,7 +78,10 @@ pressEnter(e) {
     ))}
           <div>
             {this.state.items.map(item => (
-              <p key={item.id}>{item.title}</p>
+            <p key={item.id} onClick={this.doneChange}>
+              {item.done ? 'Готово  ' : 'Не готово  '}  
+              {item.title}
+            </p>
             ))}
           </div>
             <p>{this.state.input}</p>
