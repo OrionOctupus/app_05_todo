@@ -8,44 +8,72 @@ constructor(props){
   this.state = {
     items : [
       {
-        id:1, title: "Важное дело",done: true
+        id:0, title: "Важное дело",done: true
       },
       {
-        id:2, title: "Еще одно важное дело", done: false
+        id:1, title: "Еще одно важное дело", done: false
       },
       {
-        id:3, title:"Неповерить совим глазам", done: false
+        id:2, title:"Неповерить совим глазам", done: false
       }
     ],
     input: '',
     telo: [],
   };
-  this.adderItem = this.adderItem.bind(this);
+  this.addedItem = this.addedItem.bind(this);
   this.chahgeInput = this.chahgeInput.bind(this);
+  this.pressEnter = this.pressEnter.bind(this);
 }
 
-adderItem = () => {
+addedItem = () => {
   console.log('click');
-  // let tel = this.state.telo.push('8');
+  
   this.setState(state=>{
 
-    let telo = this.state.telo;
+    let items = this.state.items;
 
-    telo.push(this.state.input);
+    items.push({
+      id: this.state.items.length,
+      title: this.state.input,
+      done: false
+    });
 
-    return telo;
+    return items;
   });
   this.setState({
     input: ''
   })
-    console.log(this.state.telo);
+    console.log(this.state);
 }
+
+// adderItem = () => {
+//   console.log('click');
+  
+//   this.setState(state=>{
+
+//     let telo = this.state.telo;
+
+//     telo.push(this.state.input);
+
+//     return telo;
+//   });
+//   this.setState({
+//     input: ''
+//   })
+//     console.log(this.state.telo);
+// }
 
 chahgeInput(e) {
   this.setState({input: e.target.value})
   console.log('изменения');
 }
 
+pressEnter(e){
+  if(e.key ==='Enter'){
+    console.log('нажата');
+    this.addedItem();
+  }
+}
 
   render(){
     return (
@@ -64,8 +92,8 @@ chahgeInput(e) {
           </div>
             <p>{this.state.input}</p>
 
-          <input onChange={this.chahgeInput} value={this.state.input}></input>
-          <button onClick={this.adderItem}>+</button>
+          <input onKeyPress={this.pressEnter} onChange={this.chahgeInput} value={this.state.input}></input>
+          <button  onClick={this.addedItem}>+</button>
         </div>
     );
   }
