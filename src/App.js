@@ -30,7 +30,7 @@ addedItem() {
   if(this.state.input.trim().length < 3){
     alert('Слишком короткая задача');
   }else{
-  this.setState(state=>{
+  this.setState(()=>{
 
     let items = this.state.items;
 
