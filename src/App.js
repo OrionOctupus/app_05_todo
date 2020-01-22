@@ -18,28 +18,45 @@ constructor(props){
       }
     ],
     input: '',
+    telo: [],
   };
-  // this.adderItem = this.adderItem.bind(this);
+  this.adderItem = this.adderItem.bind(this);
   this.chahgeInput = this.chahgeInput.bind(this);
 }
 
-adderItem () {
-  console.log('clicl');
+adderItem = () => {
+  console.log('click');
+  // let tel = this.state.telo.push('8');
+  this.setState(state=>{
+
+    let telo = this.state.telo;
+
+    telo.push(this.state.input);
+
+    return telo;
+  });
+  this.setState({
+    input: ''
+  })
+    console.log(this.state.telo);
 }
 
 chahgeInput(e) {
   this.setState({input: e.target.value})
+  console.log('изменения');
 }
 
+
   render(){
-
-
     return (
       <div className="app">
         <header>
           <h1>ToDo List</h1>
+          <button>X</button>
         </header>
-        
+    {this.state.telo.map(it=>(
+      <li>{it}</li>
+    ))}
           <div>
             {this.state.items.map(item => (
               <p key={item.id}>{item.title}</p>
@@ -47,7 +64,7 @@ chahgeInput(e) {
           </div>
             <p>{this.state.input}</p>
 
-          <input onChange={this.chahgeInput}></input>
+          <input onChange={this.chahgeInput} value={this.state.input}></input>
           <button onClick={this.adderItem}>+</button>
         </div>
     );
